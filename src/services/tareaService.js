@@ -1,14 +1,19 @@
-// services/tareaService.js
 const Tarea = require('../models/tareaModel');
 
 async function crearTarea(becario, descripcion, fecha, foto, lugar) {
     try {
+        if (!(fecha instanceof Date)) {
+            fecha = new Date(fecha);
+        }
+        // Restar 4 horas a la fecha
+        fecha.setHours(fecha.getHours() - 4);
+
         const nuevaTarea = await Tarea.create({
-        becario,
-        descripcion,
-        fecha,
-        foto,
-        lugar
+            becario,
+            descripcion,
+            fecha,
+            foto,
+            lugar
         });
         return nuevaTarea;
     } catch (error) {
@@ -35,6 +40,7 @@ async function obtenerTodasLasTareas() {
         throw error;
     }
 }
+
 module.exports = {
     crearTarea,
     obtenerTodasLasTareas,

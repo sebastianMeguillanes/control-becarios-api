@@ -2,7 +2,7 @@
 const tareaService = require('../services/tareaService');
 async function crearTarea(req, res) {
   const { becario, descripcion, fecha, lugar } = req.body;
-  
+  console.log(fecha+ "fechacontoller");
   let foto;
   if (req.file && req.file.filename) {
     foto = req.file.filename;
